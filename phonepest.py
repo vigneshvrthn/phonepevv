@@ -21,7 +21,7 @@ def transaction():
     df2=df.groupby("states")[["transaction_count","amt"]].sum()
     df2.reset_index(inplace=True)
     fig1=px.choropleth(df2,geojson=data ,locations="states",featureidkey="properties.ST_NM",color="amt",color_continuous_scale="Rainbow",
-                    range_color=(df2["amt"].min(),df2["amt"].max()),title=f"{select} Transaction for Year: {year}, Quarter :{quarter.strip("Quarter ")}",
+                    range_color=(df2["amt"].min(),df2["amt"].max()),title=f"{select} Transaction for Year: {year}, Quarter :{quarter.strip('Quarter ')}",
                     hover_name="states",hover_data={"transaction_count": True, "amt": True},fitbounds="locations",height=500,width=700)
     fig1.update_geos(visible=False)
     st.plotly_chart(fig1)
