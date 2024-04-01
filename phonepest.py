@@ -52,7 +52,7 @@ def user():
         df2.reset_index(inplace=True)     
         
         fig1=px.choropleth(df2,geojson=data ,locations="state",featureidkey="properties.ST_NM",color="no_of_user",color_continuous_scale="Rainbow",
-                        range_color=(df2["no_of_user"].min(),df2["no_of_user"].max()),title=f"Aggregation User for Year: {year}, Quarter :{quarter.strip("Quarter")}",
+                        range_color=(df2["no_of_user"].min(),df2["no_of_user"].max()),title=f"Aggregation User for Year: {year}, Quarter :{quarter}",
                         hover_name="state",hover_data={"no_of_user": True},fitbounds="locations",height=500,width=700)
         fig1.update_geos(visible=False)
         st.plotly_chart(fig1)
@@ -169,7 +169,7 @@ elif select_fun=="Data Exploration":
     if select=="Aggregation" and transaction_or_user=="User":
         df=pd.read_sql_query(f'SELECT state , sum(app_opens) as app_opens,sum(no_of_users) as users from {select}_{transaction_or_user}_detail WHERE quarter = {quarter.strip('Quarter ')} AND year = {year} group by state',conection)
         fig1=px.choropleth(df,geojson=data ,locations="state",featureidkey="properties.ST_NM",color="users",color_continuous_scale="Rainbow",
-                        range_color=(df["users"].min(),df["users"].max()),title=f"Aggregation User for Year: {year}, Quarter :{quarter.strip("Quarter")}",
+                        range_color=(df["users"].min(),df["users"].max()),title=f"Aggregation User for Year: {year}, Quarter :{quarter}",
                         hover_name="state",hover_data={"users": True,"app_opens":True},fitbounds="locations",height=500,width=700)
         fig1.update_geos(visible=False)
         st.plotly_chart(fig1)
